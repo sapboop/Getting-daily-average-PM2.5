@@ -1,0 +1,22 @@
+##codes to get overlapping datasets based on date
+import pandas as pd
+
+# Load Set A data
+set_a = pd.read_csv(r'D:\\Trail\\data1.csv')#This has PM2.5 data
+
+# Load Set B data
+set_b = pd.read_csv(r'D:\\Trail\\data2.csv')#This had AOD DATA
+
+# Merge datasets on the common date column
+merged_data = pd.merge(set_a, set_b, on='date')
+
+# Access the merged AOD and PM2.5 columns
+overlapping_dates = merged_data['date']
+overlapping_aod = merged_data['AOD']
+overlapping_pm25 = merged_data['PM2.5']
+
+# Create a new DataFrame with the overlapping data
+result = pd.DataFrame({'Date': overlapping_dates, 'AOD': overlapping_aod, 'PM2.5': overlapping_pm25})
+
+# Export the result to a CSV file
+result.to_csv('D:\\Trail\\Overlappingdata.csv', index=False)
